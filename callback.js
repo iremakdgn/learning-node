@@ -36,17 +36,47 @@ import fetch from 'node-fetch';
 
 //şimdi bu fetchler iç içe karmaşık oldu pek bir çok fetch yazmaya kalkışırsak kolay yöntemi:
 
-async function getData() {
+// async function getData() {
 
-    const users = await (await fetch("https://jsonplaceholder.typicode.com/users")).json();
-    console.log("users", users);
+//     const users = await (await fetch("https://jsonplaceholder.typicode.com/users")).json();
+//     console.log("users", users);
 
-    const post1 = await (await fetch("https://jsonplaceholder.typicode.com/posts/1")).json();
-    console.log("post1", post1);
+//     const post1 = await (await fetch("https://jsonplaceholder.typicode.com/posts/1")).json();
+//     console.log("post1", post1);
 
-    const post2 = await (await fetch("https://jsonplaceholder.typicode.com/posts/2")).json();
-    console.log("post2", post2);
+//     const post2 = await (await fetch("https://jsonplaceholder.typicode.com/posts/2")).json();
+//     console.log("post2", post2);
 
+// }
+
+// getData();
+
+//axios kullanımı
+import axios from 'axios';
+
+// (async() => {
+
+//     const { data: users } = await axios("https://jsonplaceholder.typicode.com/users");
+//     console.log("users", users);
+
+//     const { data: post1 } = await axios("https://jsonplaceholder.typicode.com/posts/1");
+//     console.log("post1", post1);
+
+//     const { data: post2 } = await axios("https://jsonplaceholder.typicode.com/posts/2");
+//     console.log("post2", post2);
+
+// })();
+
+//promise
+
+const getComments = (number) => {
+    return new Promise(async(resolve, reject) => {
+
+        const { data } = await axios("https://jsonplaceholder.typicode.com/users");
+
+        resolve(data)
+
+    })
 }
-
-getData();
+getComments().then((data) => console.log(data))
+    .catch((e) => console.log(e))
